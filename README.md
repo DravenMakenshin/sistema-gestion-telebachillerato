@@ -1,58 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestión para Telebachillerato
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema completo para la gestión de centros educativos, alumnos y calificaciones. Desarrollado con Laravel 11 como parte de una evaluación práctica.
 
-## About Laravel
+## 📋 Características principales
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- ✅ CRUD completo de Centros, Alumnos y Calificaciones
+- ✅ Buscador en tiempo real con paginación
+- ✅ Captura de calificaciones con AJAX (sin recargar página)
+- ✅ Cálculo automático de promedios y estado (Aprobado/Reprobado)
+- ✅ Sistema de autenticación con dos roles (Admin/Consultor)
+- ✅ Importación de datos desde Excel (centros y alumnos)
+- ✅ Interfaz responsiva con Bootstrap 5
+- ✅ API JSON para consulta de datos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Tecnologías utilizadas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| Laravel | 11.x | Framework PHP backend |
+| PHP | 8.3 | Lenguaje de programación |
+| MySQL | 8.0 | Base de datos |
+| Bootstrap | 5.1 | Diseño responsivo |
+| jQuery | 3.6 | Peticiones AJAX |
+| PHPSpreadsheet | ^5.7 | Importación de Excel |
 
-## Learning Laravel
+## 📊 Base de Datos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Tabla | Descripción | Registros |
+|-------|-------------|-----------|
+| `centros` | Centros educativos | 142 |
+| `alumnos` | Alumnos registrados | 200 |
+| `materias` | Materias por centro | Variable |
+| `calificaciones` | Calificaciones de alumnos | Variable |
+| `users` | Usuarios del sistema | 2 (admin + consultor) |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🔑 Credenciales de acceso
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| **Administrador** | `admin@sistema.com` | `admin123` |
+| **Consultor** | `consultor@sistema.com` | `consultor123` |
 
-## Agentic Development
+### Permisos por rol:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+| Acción | Admin | Consultor |
+|--------|-------|-----------|
+| Ver centros, alumnos, calificaciones | ✅ | ✅ |
+| Crear, editar, eliminar centros | ✅ | ❌ |
+| Crear, editar, eliminar alumnos | ✅ | ❌ |
+| Capturar y modificar calificaciones | ✅ | ❌ |
+| Gestionar usuarios | ✅ | ❌ |
+
+## 📸 Capturas de pantalla
+
+> Las capturas de pantalla se encuentran en la carpeta `screenshots/`
+
+## 📥 Instalación
+
+Para instrucciones detalladas de instalación, consulta el archivo [INSTALL.md](INSTALL.md)
+
+### Instalación rápida:
 
 ```bash
-composer require laravel/boost --dev
+# Clonar repositorio
+git clone https://github.com/DravenMakenshin/sistema-gestion-telebachillerato.git
+cd sistema-gestion-telebachillerato
 
-php artisan boost:install
-```
+# Instalar dependencias
+composer install
+cp .env.example .env
+php artisan key:generate
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+# Configurar base de datos en .env
+# Luego importar BD o ejecutar migraciones
 
-## Contributing
+# Iniciar servidor
+php artisan serve
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+📁 Estructura del proyecto
+sistema-gestion-telebachillerato/
+├── app/
+│   ├── Console/Commands/     # Comandos importar Excel
+│   ├── Http/Controllers/     # Controladores
+│   ├── Http/Middleware/      # Middlewares roles
+│   └── Models/               # Modelos
+├── database/
+│   └── gestion_universidad.sql  # Respaldo BD
+├── resources/views/
+│   ├── layouts/
+│   ├── centros/
+│   ├── alumnos/
+│   ├── calificaciones/
+│   └── usuarios/
+├── routes/
+│   └── web.php
+├── screenshots/              # Capturas de pantalla
+├── INSTALL.md                # Instrucciones detalladas
+└── README.md                 # Este archivo
 
-## Code of Conduct
+🐛 Solución de problemas comunes
+Problema	Solución
+Vite manifest error	Ignorar, usar CDN Bootstrap
+Tabla sessions no existe	php artisan session:table && php artisan migrate
+Error 403 al iniciar sesión	Verificar rol del usuario en BD
+Fechas inválidas al importar	El sistema las omite automáticamente
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+📧 Contacto
+Desarrollado para evaluación práctica de desarrollador.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+© 2024 - Sistema de Gestión de Telebachillerato
